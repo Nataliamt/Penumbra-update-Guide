@@ -1,0 +1,30 @@
+  Installation
+sudo apt update && sudo apt upgrade
+sudo apt install make curl tar wget clang pkg-config libssl-dev jq build-essential -y
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  1 item
+source ~/.cargo/env
+apt install git
+rm -rf penumbra 
+git clone https://github.com/penumbra-zone/penumbra 
+cd penumbra
+git checkout 007-herse
+cargo update
+cargo build --release --bin pcli
+cd $HOME/penumbra
+cargo run --quiet --release --bin pcli wallet import <Ваш Seed>
+cargo run --quiet --release --bin pcli addr list
+cargo run --quiet --release --bin pcli wallet reset
+cargo run --quiet --release --bin pcli addr list
+   Creating a wallet
+  cd $HOME/penumbra
+  cargo run --quiet --release --bin pcli wallet generate
+  cargo run --quiet --release --bin pcli addr list
+   Start synchronization and wait for it to finish
+  export RUST_LOG=info
+  cargo run --quiet --release --bin pcli sync
+   View balance
+  
+  cargo run --quiet --release --bin pcli balance
+   Get the seed phrase and save it
+  cargo run --quiet --release --bin pcli wallet export
